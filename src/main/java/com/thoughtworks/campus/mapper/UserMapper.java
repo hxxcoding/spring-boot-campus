@@ -1,19 +1,16 @@
 package com.thoughtworks.campus.mapper;
 
-
 import com.thoughtworks.campus.entity.User;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
-import java.util.List;
+/**
+ * <p>
+ *  Mapper 接口
+ * </p>
+ *
+ * @author Xiaoxiao Hu
+ * @since 2021-08-11
+ */
+public interface UserMapper extends BaseMapper<User> {
 
-@Mapper
-public interface UserMapper {
-
-    @Select("select * from user")
-    List<User> queryAllUser();
-
-    @Insert("insert into user(id,username,password) values (#{id},#{username},#{password})")
-    void insertUser(User user);
 }

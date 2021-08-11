@@ -1,7 +1,7 @@
 package com.thoughtworks.campus;
 
 import com.thoughtworks.campus.entity.User;
-import com.thoughtworks.campus.mapper.UserMapper;
+import com.thoughtworks.campus.service.IUserService;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,11 +14,11 @@ import java.util.List;
 class CampusApplicationTests extends AbstractTransactionalJUnit4SpringContextTests {
 
 	@Autowired
-	private UserMapper userMapper;
+	private IUserService userService;
 
 	@Test
 	void testFindAllUser() {
-		List<User> userList = userMapper.queryAllUser();
+		List<User> userList = userService.lambdaQuery().list();
 		assertEquals(3, userList.size());
 		System.out.println(userList);
 	}
@@ -26,10 +26,10 @@ class CampusApplicationTests extends AbstractTransactionalJUnit4SpringContextTes
 	@Test
 	void testInsertUser() {
 		User user = new User();
-		user.setId(4);
 		user.setUsername("lyt");
 		user.setPassword("123");
-		userMapper.insertUser(user);
-		System.out.println(userMapper.queryAllUser());
+		userService.save(user);
+		System.out.println(userService.lambdaQuery().list());
 	}
+
 }

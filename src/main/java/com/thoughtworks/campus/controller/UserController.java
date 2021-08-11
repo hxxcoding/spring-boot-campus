@@ -1,38 +1,32 @@
 package com.thoughtworks.campus.controller;
 
+
 import com.thoughtworks.campus.entity.User;
-import com.thoughtworks.campus.mapper.UserMapper;
+import com.thoughtworks.campus.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * <p>
+ *  前端控制器
+ * </p>
+ *
+ * @author Xiaoxiao Hu
+ * @since 2021-08-11
+ */
 @RestController
+@RequestMapping("/user")
 public class UserController {
 
     @Autowired
-    private UserMapper userMapper;
+    private IUserService userService;
 
-    @GetMapping("/user")
-    public List<User> findAllUser() {
-        return userMapper.queryAllUser();
+    @GetMapping("/getuser")
+    public User getUser() {
+        return userService.getById(1);
     }
-
-    @PostMapping("/adduser")
-    public Map<String, Object> addUser(HttpServletRequest request, @RequestParam("id")int id,
-                                       @RequestParam("username")String username,
-                                       @RequestParam("password")String password) {
-        Map<String, Object> modelMap = new HashMap<>();
-        User user = new User();
-        user.setId(id);
-        user.setUsername(username);
-        user.setPassword(password);
-        userMapper.insertUser(user);
-        modelMap.put("success", user);
-        return modelMap;
-    }
-
 }
