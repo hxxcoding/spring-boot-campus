@@ -1,4 +1,4 @@
-package com.thoughtworks.campus.conf;
+package com.thoughtworks.campus.config;
 
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import org.springframework.context.annotation.Bean;

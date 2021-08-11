@@ -4,11 +4,7 @@ package com.thoughtworks.campus.controller;
 import com.thoughtworks.campus.entity.User;
 import com.thoughtworks.campus.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * <p>
@@ -19,14 +15,29 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2021-08-11
  */
 @RestController
-@RequestMapping("/user")
 public class UserController {
 
     @Autowired
     private IUserService userService;
 
-    @GetMapping("/getuser")
-    public User getUser() {
-        return userService.getById(1);
+    @GetMapping("/getuserbyid/{id}")
+    public User getUserById(@PathVariable("id") int id) {
+        return userService.getById(id);
+    }
+
+    @PutMapping("modify")
+    public boolean modifyUser(@RequestBody User user) {
+        return userService.saveOrUpdate(user);
+    }
+
+
+    @PostMapping("adduser")
+    public boolean addUser(@RequestBody User user) {
+        return userService.save(user);
+    }
+
+    @DeleteMapping("/deleteuserbyid/{id}")
+    public int deleteUser(@PathVariable("id") int id) {
+        return userService.getBaseMapper().deleteById(id);
     }
 }

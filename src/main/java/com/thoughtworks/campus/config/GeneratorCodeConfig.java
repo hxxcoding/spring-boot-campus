@@ -1,4 +1,4 @@
-package com.thoughtworks.campus.conf;
+package com.thoughtworks.campus.config;
 
 import com.baomidou.mybatisplus.core.exceptions.MybatisPlusException;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
